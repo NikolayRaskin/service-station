@@ -1,0 +1,177 @@
+{% extends 'mainPage/base.html' %}
+{% load static %}
+{% block title %}Admin Service Station{% endblock %}
+<!-- --------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------- -->
+{% block content %}
+<section class="container">
+    <div class="searche-and-add">
+        <div class="searche-and-add__item searche-and-add__item_search">
+            <input type="search" class="search" placeholder="Search" id="search-text">
+            <span class="text-muted">Searching by First name and Last name.</span>
+        </div>
+        <div class="searche-and-add__item searche-and-add__item_right">
+            <a href="{% url 'addCustomer' %}"><button type="button" class="btn  btn-warning add-customer">Add customer</button></a>
+        </div>
+        <div class="searche-and-add__item searche-and-add__item_right">
+            <a href="{% url 'addCar' %}"><button type="button" class="btn  btn-warning add-customer">Add car</button></a>
+        </div>
+        <div class="searche-and-add__item searche-and-add__item_right">
+            <a href="{% url 'addOrder' %}"><button type="button" class="btn  btn-warning add-customer">Add Order</button></a>
+        </div>
+    </div>
+</section>
+<div class="customer-info">
+    <nav class="nav">
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Customers</a>
+            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Cars</a>
+            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Orders</a>
+        </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+        <div class="tab-content__item">
+            <section class="container">
+                <div class="listOfCustomers">
+                    <table class="table table-hover" id="info-tableCustomers">
+                        <thead>
+                            <tr>
+                                <th scope="col">id</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Phone</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">isReturning</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if customers %}
+                                {% for post in customers %}
+                                    <tr>
+                                        <th scope="row">{{post.id}}</th>
+                                        <td class="customer-name-and-img">
+                                            <div class="customer-name-and-img__item">
+                                                <img class="customer-img" src="/media/avatars/default_avatar.png" alt="avatar">
+                                            </div>
+                                            <div class="customer-name-and-img__item_span">
+                                                <span>{{post.lastName}} {{post.firstName}}<br> {{post.email}}</span>
+                                            </div>
+                                        </td>
+                                        <td>{{post.phone}}</td>
+                                        <td>{{post.address}}</td>
+                                        <td>
+                                            {% if post.isReturn %}
+                                                <span class="badge badge-light-success">Returning</span>
+                                            {% else %}
+                                                <span class="badge badge-light-danger">New</span>
+                                            {% endif %}
+                                        </td>
+                                        <td><a href="{% url 'customerProfile' post.id %}"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></a></td>
+                                        <td><a href="{% url 'editCustomer' post.id %}"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></a></td>
+                                        <td><a href="{% url 'removeCustomer' post.id %}"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></a></td>
+                                    </tr>
+                                {% endfor %}
+                            {% else %}
+                            <tr>
+                                <td colspan="6" class="noContentTd">No customers</td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                        </table>
+                </div>
+            </section>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+        <div class="tab-content__item">
+            <section class="container">
+                <div class="listOfCustomers">
+                    <table class="table table-hover" id="info-tableCars">
+                        <thead>
+                            <tr>
+                                <th scope="col">id</th>
+                                <th scope="col">Owner</th>
+                                <th scope="col">Make</th>
+                                <th scope="col">Model</th>
+                                <th scope="col">yearOfСarManufacture</th>
+                                <th scope="col">vin</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if customers %}
+                                {% for post in cars %}
+                                    <tr>
+                                        <th scope="row">{{post.id}}</th>
+                                        <td>{{post.owner.lastName}} {{post.owner.firstName}}</td>
+                                        <td>{{post.make}}</td>
+                                        <td>{{post.model}}</td>
+                                        <td>{{post.yearOfСarManufacture}}</td>
+                                        <td>{{post.vin}}</td>
+                                        <td><a href="{% url 'editCustomer' post.id %}"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></a></td>
+                                        <td><a href="{% url 'removeCustomer' post.id %}"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></a></td>
+                                    </tr>
+                                {% endfor %}
+                            {% else %}
+                            <tr>
+                                <td colspan="6" class="noContentTd">No cars</td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                        </table>
+                </div>
+            </section>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+        <div class="tab-content__item">
+            <section class="container">
+                <div class="listOfCustomers">
+                    <table class="table table-hover info-tables" id="info-tableOrders">
+                        <thead>
+                            <tr>
+                                <th scope="col">id</th>
+                                <th scope="col">OrderOwner</th>
+                                <th scope="col">OrderCar</th>
+                                <th scope="col">orderDate</th>
+                                <th scope="col">orderAmount</th>
+                                <th scope="col">orderStatus</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if customers %}
+                                {% for post in orders %}
+                                    <tr>
+                                        <th scope="row">{{post.id}}</th>
+                                        <td>{{post.orderOwner.lastName}} {{post.orderOwner.firstName}}</td>
+                                        <td>{{post.orderCar.make}} {{post.orderCar.model}} </td>
+                                        <td>{{post.orderDate}}</td>
+                                        <td>{{post.orderAmount}}</td>
+                                        <td>{{post.orderStatus}}</td>
+                                        <td><a href="{% url 'editCustomer' post.id %}"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></a></td>
+                                        <td><a href="{% url 'removeCustomer' post.id %}"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></a></td>
+                                    </tr>
+                                {% endfor %}
+                            {% else %}
+                            <tr>
+                                <td colspan="6" class="noContentTd">No customers</td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                        </table>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+{% endblock %}
+<!-- --------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------- -->
+{% block footer %}
+{% endblock %}

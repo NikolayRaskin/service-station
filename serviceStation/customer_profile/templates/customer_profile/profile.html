@@ -1,0 +1,164 @@
+{% extends 'mainPage/base.html' %}
+{% load static %}
+{% block title %}{{customer.lastName}} {{customer.firstName}}{% endblock %}
+
+{% block content %}
+<section class="profile-container container">
+    <section class="profile-container__item">
+        <div class="profile-container-logo">
+            <img class="customer-img_big" src="/media/avatars/default_avatar.png" alt="avatar">
+            <div class="chilankaFont">{{customer.lastName}} {{customer.firstName}}</div>
+        </div>
+        <div class="buttons">
+            <a href="{% url 'editCustomer' customer.id %}"><button type="button" class="btn btn-primary buttons__item">Edit profile</button></a>
+            <a href="{% url 'removeCustomer' customer.id %}"><button type="button" class="btn btn-danger buttons__item">Remove customer</button></a>
+        </div>
+    </section>
+    <hr class="line">
+    <section class="profile-container__item">
+        <div class="customer-info">
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Profile</a>
+                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Cars</a>
+                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Orders</a>
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                <div class="tab-content__item">
+                    <h2>Customer profile</h2>
+                    <div class="tab-content__info">
+                        <table class="tab-content__info-table">
+                           <tbody>
+                                <tr>
+                                    <td>First name:</td>
+                                    <td>{{customer.lastName}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Last name:</td>
+                                    <td>{{customer.firstName}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Email:</td>
+                                    <td>{{customer.email}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Phone:</td>
+                                    <td>{{customer.phone}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Location:</td>
+                                    <td>{{customer.address}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Date of Birth:</td>
+                                    <td>{{customer.birthDate}}</td>
+                                </tr>
+                                <tr>
+                                    <td>isReturning:</td>
+                                    <td>
+                                        {% if customer.isReturn %}
+                                            <span class="badge badge-light-success">Returning</span>
+                                        {% else %}
+                                            <span class="badge badge-light-danger">New</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                           </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                <div class="tab-content__item">
+                    <h2>Customer Cars</h2>
+                    <div class="tab-content__info">
+                        <table class="table table-hover" id="info-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">id</th>
+                                    <th scope="col">Make</th>
+                                    <th scope="col">Phone</th>
+                                    <th scope="col">Address</th>
+                                    <th scope="col">VIN</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if car %}
+                                    {% for post in car %}
+                                    <tr>
+                                        <th scope="row">{{post.id}}</th>
+                                        <td>{{post.make}}</td>
+                                        <td>{{post.model}}</td>
+                                        <td>{{post.yearOfСarManufacture}}</td>
+                                        <td>{{post.vin}}</td>
+                                        <td><a href="{% url 'editCar' post.id %}"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></a></td>
+                                        <td><a href="{% url 'removeCar' post.id %}"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></a></td>
+                                    </tr>
+                                    {% endfor %}
+                                {% else %}
+                                <tr>
+                                    <td colspan="7" class="noContentTd">No cars</td>
+                                </tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                        <div class="searche-and-add__item searche-and-add__item_right">
+                            <a href="{% url 'addCar' %}"><button type="button" class="btn  btn-warning add-customer">Add car</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                <div class="tab-content__item">
+                    <h2>Customer Orders</h2>
+                    <div class="tab-content__info">
+                        <table class="table table-hover" id="info-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">id</th>
+                                    <th scope="col">Car</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Order Amount</th>
+                                    <th scope="col">Order Status</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if order %}
+                                    {% for post in order %}
+                                    <tr>
+                                        <th scope="row">{{post.id}}</th>
+                                        <td>{{post.orderCar}}</td>
+                                        <td>{{post.orderDate}}</td>
+                                        <td>{{post.orderAmount}}</td>
+                                        <td>{{post.orderStatus}}</td>
+                                        <td><a href="{% url 'editOrder' post.id %}"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></a></td>
+                                        <td><a href="{% url 'removeOrder' post.id %}"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></a></td>
+                                    </tr>
+                                    {% endfor %}
+                                {% else %}
+                                <tr>
+                                    <td colspan="7" class="noContentTd">No orders</td>
+                                </tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                        <div class="searche-and-add__item searche-and-add__item_right">
+                                <a href="{% url 'addOrder' %}"><button type="button" class="btn  btn-warning add-customer">Add Order</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+</section>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'mainPage/base.html' %}
+{% load static %}
+{% block title %}Add Car{% endblock %}
+
+{% block content %}
+<form class="addForm" enctype="multipart/form-data" method="POST" action="{% url 'addCar' %}">
+    {% csrf_token %}
+    <div class="addForm__item">
+        {{form.as_p}}
+    </div>
+    <div class="addForm__item">
+        <button type="submit" class="btn  btn-warning add-customer">Add Car</button>
+    </div>
+</form>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
