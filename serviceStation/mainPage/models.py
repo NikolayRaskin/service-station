@@ -43,3 +43,10 @@ class Order(models.Model):
     )
     def __str__(self):
         return self.orderOwner.lastName + ' ' + self.orderCar.model + ': ' + self.orderStatus
+    
+    def checkOrderAmount(self):
+        "Order Amount shoul be 0 - 10000."
+        if self.orderAmount < 0:
+            return 0
+        elif self.orderAmount > 10000:
+            return 10000

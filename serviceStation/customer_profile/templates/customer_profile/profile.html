@@ -72,7 +72,7 @@
             </div>
             <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                 <div class="tab-content__item">
-                    <h2>Customer Cars</h2>
+                    <h2>{{customer.firstName}}'s Cars</h2>
                     <div class="tab-content__info">
                         <table class="table table-hover" id="info-table">
                             <thead>
@@ -106,15 +106,15 @@
                                 {% endif %}
                             </tbody>
                         </table>
-                        <div class="searche-and-add__item searche-and-add__item_right">
+                        <!-- <div class="searche-and-add__item searche-and-add__item_right">
                             <a href="{% url 'addCar' %}"><button type="button" class="btn  btn-warning add-customer">Add car</button></a>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
             <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
                 <div class="tab-content__item">
-                    <h2>Customer Orders</h2>
+                    <h2>{{customer.firstName}}'s Orders</h2>
                     <div class="tab-content__info">
                         <table class="table table-hover" id="info-table">
                             <thead>
@@ -148,9 +148,9 @@
                                 {% endif %}
                             </tbody>
                         </table>
-                        <div class="searche-and-add__item searche-and-add__item_right">
+                        <!-- <div class="searche-and-add__item searche-and-add__item_right">
                                 <a href="{% url 'addOrder' %}"><button type="button" class="btn  btn-warning add-customer">Add Order</button></a>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
