@@ -6,7 +6,11 @@
 <section class="profile-container container">
     <section class="profile-container__item">
         <div class="profile-container-logo">
-            <img class="customer-img_big" src="/media/avatars/default_avatar.png" alt="avatar">
+            {% if customer.sex == 'M' %}
+                <img class="customer-img_big" src="{% static 'mainPage/img/male.png' %}" alt="avatar">                                                
+            {% else %}
+                <img class="customer-img_big" src="{% static 'mainPage/img/female.png' %}" alt="avatar">
+            {% endif %}
             <div class="chilankaFont">{{customer.lastName}} {{customer.firstName}}</div>
         </div>
         <div class="buttons">

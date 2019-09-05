@@ -1,17 +1,24 @@
 from django.db import models
+from django.shortcuts import redirect
 from django.utils.translation import ugettext_lazy as _
 from phone_field import PhoneField
 
 STATUS_CHOICES = (
-        ('cancelled', 'Cancelled'),
-        ('progress', ' In Progress'),
-        ('completed', 'Completed')
-    )
+    ('cancelled', 'Cancelled'),
+    ('progress', ' In Progress'),
+    ('completed', 'Completed')
+)
+
+SEX_CHOICES = (
+    ('M', 'Male'),
+    ('F', ' Female')
+)
 
 class Customer(models.Model):
     firstName = models.CharField(_('First name'), max_length = 100)
     lastName = models.CharField(_('Last name'), max_length = 100)
     birthDate = models.DateTimeField(_('Date of birth'))
+    sex = models.CharField(_('Sex'), max_length=100, choices=SEX_CHOICES, default='M')
     address = models.CharField(_('Address'), max_length = 100)
     phone = models.CharField(_('Phone'), max_length = 20)
     email = models.EmailField(_('Email:'),null=False)
@@ -31,8 +38,8 @@ class Car(models.Model):
         return self.owner.lastName + ': ' + self.model
 
 class Order(models.Model):
-    orderCar = models.ForeignKey(Car, on_delete = models.CASCADE, null=True)
-    orderOwner = models.ForeignKey(Customer, on_delete = models.CASCADE, null=True)
+    orderCar = models.ForeignKey(Car, on_delete = models.PROTECT, null=True)
+    orderOwner = models.ForeignKey(Customer, on_delete = models.PROTECT, null=True)
     orderDate = models.DateField(_('Date of order'),null=False)
     orderAmount = models.DecimalField(_('Order Amount'), max_digits = 10, decimal_places = 2)
     orderStatus = models.CharField(
@@ -43,10 +50,3 @@ class Order(models.Model):
     )
     def __str__(self):
         return self.orderOwner.lastName + ' ' + self.orderCar.model + ': ' + self.orderStatus
-    
-    def checkOrderAmount(self):
-        "Order Amount shoul be 0 - 10000."
-        if self.orderAmount < 0:
-            return 0
-        elif self.orderAmount > 10000:
-            return 10000

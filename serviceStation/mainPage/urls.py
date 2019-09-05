@@ -15,6 +15,3 @@ urlpatterns = [
     path('addOrder/',views.addOrder, name = 'addOrder'),
     path('addCar/',views.addCar, name = 'addCar'),
 ]
-if settings.DEBUG:
-        urlpatterns += static(settings.MEDIA_URL,
-                              document_root=settings.MEDIA_ROOT)

@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect
+from django.db import models
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
@@ -34,7 +35,11 @@ def customerProfile(request, id):
 @login_required
 def removeCar(request,id):
     car = Car.objects.get(pk=id)
-    car.delete()
+    try:
+        car.delete()
+    except models.ProtectedError:
+        raise Http404('ProtectedError')
+        # return render(request,'customer_profile/afterProtectedError.html')
     return redirect('mainPage')
 
 @login_required

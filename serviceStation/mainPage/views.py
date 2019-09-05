@@ -121,15 +121,20 @@ def addOrder(request):
     if request.method == 'POST':
         form = OrderForm(request.POST or None)
         if form.is_valid():
-            orderOwner = form.cleaned_data['orderOwner']
             orderCar = form.cleaned_data['orderCar']
             orderDate = form.cleaned_data['orderDate']
             orderAmount = form.cleaned_data['orderAmount']
             orderStatus = form.cleaned_data['orderStatus']
             
+            if orderAmount < 0.00:
+                orderAmount = 0.00
+            elif orderAmount > 10000.00:
+                orderAmount = 10000.00
+            
             newOrder = Order()
+
             newOrder.orderCar = orderCar
-            newOrder.orderOwner = orderOwner
+            newOrder.orderOwner = orderCar.owner
             newOrder.orderDate = orderDate
             newOrder.orderAmount = orderAmount
             newOrder.orderStatus = orderStatus
