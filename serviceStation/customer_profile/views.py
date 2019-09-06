@@ -5,6 +5,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import Http404
+from django.core.exceptions import ValidationError
 from mainPage.models import Customer, Car, Order
 from .addCarForm import CarForm
 from .addOrderForm import OrderForm
@@ -35,11 +36,7 @@ def customerProfile(request, id):
 @login_required
 def removeCar(request,id):
     car = Car.objects.get(pk=id)
-    try:
-        car.delete()
-    except models.ProtectedError:
-        raise Http404('ProtectedError')
-        # return render(request,'customer_profile/afterProtectedError.html')
+    car.delete()
     return redirect('mainPage')
 
 @login_required
@@ -47,10 +44,12 @@ def editCar(request,id):
     car = Car.objects.get(pk=id)
     form = CarForm(request.POST or None, instance=car)
     if form.is_valid():
-        form.save()
-        return redirect('mainPage')
-    else:
-        print('Form isn\'t valid!')
+        try:
+            form.save()
+            return redirect('mainPage')
+        except ValidationError:
+            messages.info(request, 'VIN isn\'t valid!')
+
     context = {
         'form':form,
         'id':id,
@@ -70,8 +69,6 @@ def editOrder(request,id):
     if form.is_valid():
         form.save()
         return redirect('mainPage')
-    else:
-        print('Form isn\'t valid!')
     context = {
         'form':form,
         'id':id,

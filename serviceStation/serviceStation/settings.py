@@ -25,14 +25,15 @@ SECRET_KEY = 'z#14xxw*_)b)ntkoy5^h^u*4&s^baff7)!df54207@1)=8cz+1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+
+]
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'mainPage',
-    'phone_field',
     'customer_profile',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -125,11 +126,11 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_L10N = True
+USE_L10N = False
 
 USE_TZ = True
 
-DATETIME_FORMAT = 'dd.mm.yyyy'
+DATE_FORMAT = 'd E Y'
 
 
 # Static files (CSS, JavaScript, Images)
@@ -145,6 +146,3 @@ STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

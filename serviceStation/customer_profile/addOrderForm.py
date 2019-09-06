@@ -8,6 +8,7 @@ class OrderForm(forms.ModelForm):
         input_formats=('%d/%m/%Y',),
         help_text = '(d/m/yyyy) format',
         )
+    orderAmount = forms.DecimalField(label='Order amount',help_text = 'Between 0.00 and 10000.00')
     class Meta:
         model = Order
         fields = ('orderCar','orderDate','orderAmount','orderStatus')

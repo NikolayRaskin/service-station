@@ -14,4 +14,8 @@ urlpatterns = [
 
     path('addOrder/',views.addOrder, name = 'addOrder'),
     path('addCar/',views.addCar, name = 'addCar'),
+
+    path('inputDateError/',views.inputDateError, name = 'inputDateError'),
+    path('inputEmailError/',views.inputEmailError, name = 'inputEmailError'),
+    path('inputVINError/',views.inputVINError, name = 'inputVINError'),
 ]

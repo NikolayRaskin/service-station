@@ -11,6 +11,15 @@
     <div class="addForm__item">
         <button type="submit" class="btn  btn-warning add-customer">Add customer</button>
     </div>
+    {% if messages %}
+    <div class="addForm__item messages">
+        {% for message in messages %}
+        <p>
+            {{ message }}
+        </p>
+        {% endfor %}
+    </dvi>
+    {% endif %}
 </form>
 {% endblock %}
 
