@@ -87,14 +87,14 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'HOST': 'localhost',
-        'NAME': 'test3',
+        'NAME': 'test1',
         'USER': 'nikolayraskin',
         'PASSWORD': 'Delet123',
     }
 }
-#GRANT ALL PRIVILEGES ON `test2`.* TO 'nikolayraskin'@'localhost';
-#FLUSH PRIVILEGES;
 #CREATE DATABASE test2 CHARACTER SET utf8;
+#GRANT ALL PRIVILEGES ON `test1`.* TO 'nikolayraskin'@'localhost';
+#FLUSH PRIVILEGES;
 #show databases;
 
 

@@ -1,5 +1,88 @@
 [
 {
+  "model": "mainPage.customer",
+  "pk": 39,
+  "fields": {
+    "firstName": "Raskin",
+    "lastName": "Nikolay",
+    "birthDate": "1998-09-25",
+    "sex": "M",
+    "address": "Gomel, Belarus",
+    "phone": "+375293081115",
+    "email": "nikolay.raskin98@gmail.com",
+    "isReturn": true
+  }
+},
+{
+  "model": "mainPage.customer",
+  "pk": 40,
+  "fields": {
+    "firstName": "Maria",
+    "lastName": "Ivanova",
+    "birthDate": "2012-12-12",
+    "sex": "F",
+    "address": "Gomel, Belarus",
+    "phone": "+375291233214",
+    "email": "maria@mail.ru",
+    "isReturn": false
+  }
+},
+{
+  "model": "mainPage.car",
+  "pk": 31,
+  "fields": {
+    "owner": 39,
+    "make": "Porsche",
+    "model": "Panamera Turbo S",
+    "yearOf\u0421arManufacture": "2019-02-05",
+    "vin": "123ASD321QWE12399"
+  }
+},
+{
+  "model": "mainPage.car",
+  "pk": 32,
+  "fields": {
+    "owner": 40,
+    "make": "Lamborghini",
+    "model": "Urus",
+    "yearOf\u0421arManufacture": "2019-09-01",
+    "vin": "12345678912345678"
+  }
+},
+{
+  "model": "mainPage.order",
+  "pk": 31,
+  "fields": {
+    "orderCar": 31,
+    "orderOwner": 39,
+    "orderDate": "2019-09-06",
+    "orderAmount": "123.00",
+    "orderStatus": "progress"
+  }
+},
+{
+  "model": "mainPage.order",
+  "pk": 32,
+  "fields": {
+    "orderCar": 31,
+    "orderOwner": 39,
+    "orderDate": "2019-09-12",
+    "orderAmount": "10000.00",
+    "orderStatus": "progress"
+  }
+},
+{
+  "model": "mainPage.order",
+  "pk": 33,
+  "fields": {
+    "orderCar": 32,
+    "orderOwner": 40,
+    "orderDate": "2019-09-06",
+    "orderAmount": "10000.00",
+    "orderStatus": "progress"
+  }
+},
+{
   "model": "auth.permission",
   "pk": 1,
   "fields": {
@@ -327,8 +410,8 @@
   "model": "auth.user",
   "pk": 1,
   "fields": {
-    "password": "pbkdf2_sha256$150000$pKdZ4G2eNmkh$q++YaCi5ytN0XxbGxewt/oitj1ubTYWBhkLjKYlJ5to=",
-    "last_login": "2019-09-03T12:13:53.996Z",
+    "password": "pbkdf2_sha256$150000$WCqDhpdvbi5R$S9CUysf1F/t3fp1auTKdkebJQHH3q4MWmHMHYkTGuJs=",
+    "last_login": "2019-09-06T16:14:27.131Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -336,17 +419,67 @@
     "email": "admin@gmail.com",
     "is_staff": true,
     "is_active": true,
-    "date_joined": "2019-09-03T12:13:44.746Z",
+    "date_joined": "2019-09-04T15:02:21.515Z",
     "groups": [],
     "user_permissions": []
   }
 },
 {
   "model": "sessions.session",
-  "pk": "al7q6n8w6d07m87z3cjv8o2sbtd7t85f",
+  "pk": "8j6bzlojbqyvt1qryny6ruay15jg9kdl",
   "fields": {
-    "session_data": "YzkyNTc4YWVkYjM2ODQ0MmM3MGU4ZWE3ODc3MGQzMTdiNTc1OGU2OTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIyZWE5YWFjZTExZDkzZThmZWJkYzhlYWVjMTkxZGEyMDYzYmVlODA0In0=",
-    "expire_date": "2019-09-17T12:13:53.999Z"
+    "session_data": "N2VjODI3ZWFmYzk1NjU3YWU4NTIwNjQ1OTlkOGFmMjhkNGU5OWIyNDp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI2NWRjNjEwZDRiMGQ4Y2ExNTE0ZWUxYjg4Yjk5ZTM5M2JhNGU1ZTExIn0=",
+    "expire_date": "2019-09-20T13:49:33.802Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "9fz0w0mhccxf4u1f4j458zibae4ncsu9",
+  "fields": {
+    "session_data": "N2VjODI3ZWFmYzk1NjU3YWU4NTIwNjQ1OTlkOGFmMjhkNGU5OWIyNDp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI2NWRjNjEwZDRiMGQ4Y2ExNTE0ZWUxYjg4Yjk5ZTM5M2JhNGU1ZTExIn0=",
+    "expire_date": "2019-09-19T07:28:42.350Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "on33dg19zv168gce3bs00vcs5epj2em3",
+  "fields": {
+    "session_data": "N2VjODI3ZWFmYzk1NjU3YWU4NTIwNjQ1OTlkOGFmMjhkNGU5OWIyNDp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI2NWRjNjEwZDRiMGQ4Y2ExNTE0ZWUxYjg4Yjk5ZTM5M2JhNGU1ZTExIn0=",
+    "expire_date": "2019-09-20T16:14:27.134Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "u3kgivi9ludkv2htjr9yeslox6bbrrc0",
+  "fields": {
+    "session_data": "N2VjODI3ZWFmYzk1NjU3YWU4NTIwNjQ1OTlkOGFmMjhkNGU5OWIyNDp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI2NWRjNjEwZDRiMGQ4Y2ExNTE0ZWUxYjg4Yjk5ZTM5M2JhNGU1ZTExIn0=",
+    "expire_date": "2019-09-20T08:16:38.267Z"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 1,
+  "fields": {
+    "action_time": "2019-09-04T15:12:03.452Z",
+    "user": 1,
+    "content_type": 2,
+    "object_id": "1",
+    "object_repr": "Nikolay Raskin",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"isReturn\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 2,
+  "fields": {
+    "action_time": "2019-09-04T15:12:26.222Z",
+    "user": 1,
+    "content_type": 2,
+    "object_id": "1",
+    "object_repr": "Nikolay Raskin",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"avatar\"]}}]"
   }
 }
 ]

@@ -38,8 +38,7 @@ class Customer(models.Model):
     def save(self, *args, **kwargs):
         today = datetime.date.today()
         if self.birthDate >= today:
-            raise Http404('Birth Date isn\'t valid!')
-            #messages.info(request, 'Birth Date isn\'t valid!')
+            raise ValidationError('Birth Date isn\'t valid!')
         super().save(*args, **kwargs)  # Call the "real" save() method.
 
 class Car(models.Model):
@@ -56,7 +55,6 @@ class Car(models.Model):
         reg = '[-+!@#%^&,.:<>±§~]'
         if re.findall(reg, self.vin) != []:
             raise ValidationError('VIN isn\'t valid!')
-            #messages.info(request, 'Birth Date isn\'t valid!')
         super().save(*args, **kwargs)
 
 class Order(models.Model):
@@ -76,7 +74,7 @@ class Order(models.Model):
     def save(self, *args, **kwargs):
         today = datetime.date.today()
         if self.orderDate < today:
-            raise Http404('Date isn\'t valid!')
+            self.orderDate = today
         if self.orderAmount < 0.00:
             self.orderAmount = 0.00
         elif self.orderAmount > 10000.00:

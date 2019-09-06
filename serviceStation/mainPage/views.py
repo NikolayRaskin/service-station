@@ -41,6 +41,7 @@ def addCustomer(request):
             firstName = form.cleaned_data['firstName']
             lastName = form.cleaned_data['lastName']
             birthDate = form.cleaned_data['birthDate']
+            sex = form.cleaned_data['sex']
             address = form.cleaned_data['address']
             phone = form.cleaned_data['phone']
             email = form.cleaned_data['email']
@@ -50,14 +51,18 @@ def addCustomer(request):
                 newCustomer.firstName = firstName
                 newCustomer.lastName = lastName
                 newCustomer.birthDate = birthDate
+                newCustomer.sex = sex
                 newCustomer.address = address
                 newCustomer.phone = phone
                 newCustomer.email = email
                 newCustomer.isReturn = isReturn
-                newCustomer.save(request)
+                try:
+                    newCustomer.save()
+                    return redirect('mainPage')
+                except ValidationError:
+                    messages.info(request, 'Invalid date!')
             else:
                 messages.info(request, 'Email already exists!')
-            return redirect('/')
         else:
             messages.info(request, 'Form isn\'t valid!')
     else:
@@ -79,8 +84,11 @@ def editCustomer(request,id):
     customer = Customer.objects.get(pk=id)
     form = CustomerForm(request.POST or None, instance=customer)
     if form.is_valid():
-        form.save()
-        return redirect('mainPage')
+        try:
+            form.save()
+            return redirect('mainPage')
+        except ValidationError:
+            messages.info(request, 'Invalid date!')
     else:
         print('Form isn\'t valid!')
     context = {
