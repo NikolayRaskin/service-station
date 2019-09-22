@@ -77,21 +77,21 @@ WSGI_APPLICATION = 'serviceStation.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'HOST': 'localhost',
-        'NAME': 'test1',
-        'USER': 'nikolayraskin',
-        'PASSWORD': 'Delet123',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'HOST': 'localhost',
+#         'NAME': 'test1',
+#         'USER': 'nikolayraskin',
+#         'PASSWORD': 'Delet123',
+#     }
+# }
 #CREATE DATABASE test2 CHARACTER SET utf8;
 #GRANT ALL PRIVILEGES ON `test1`.* TO 'nikolayraskin'@'localhost';
 #FLUSH PRIVILEGES;

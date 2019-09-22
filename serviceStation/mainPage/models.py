@@ -26,10 +26,9 @@ class Customer(models.Model):
     birthDate = models.DateField(_('Date of birth'))
     sex = models.CharField(_('Sex'), max_length=100, choices=SEX_CHOICES, default='M')
     address = models.CharField(_('Address'), max_length = 100)
-    #phone = models.CharField(_('Phone'), max_length = 20)
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
     phone = models.CharField(validators=[phone_regex], max_length=17, blank=True)
-    email = models.EmailField(_('Email:'),null=False)
+    email = models.EmailField(_('Email:'),null=False, unique=True)
     isReturn = models.BooleanField(default=False)
     
     def __str__(self):
@@ -46,7 +45,7 @@ class Car(models.Model):
     make = models.CharField(_('Make '), max_length = 100)
     model = models.CharField(_('Model'), max_length = 100)
     yearOfСarManufacture = models.DateField(_('Year Of Сar Manufacture'), blank=True,null=False)
-    vin = models.CharField(_('VIN'), max_length = 18)
+    vin = models.CharField(_('VIN'), max_length = 18, unique=True)
     
     def __str__(self):
         return self.owner.lastName + ': ' + self.model

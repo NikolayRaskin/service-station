@@ -1,5 +1,5 @@
 from django import forms
-from mainPage.models import Customer
+from .models import Customer
 
 class CustomerForm(forms.ModelForm):
     birthDate = forms.DateField(
